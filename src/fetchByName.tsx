@@ -49,7 +49,9 @@ export default function Val(props: { arguments: Arguments.FetchByName }) {
       actions={
         <ActionPanel>
           <Action.CopyToClipboard title="Copy Run Endpoint" content={runEndpoint} />
+          <Action.OpenInBrowser title="Open Run Endpoint" url={runEndpoint} />
           <Action.CopyToClipboard title="Copy Express Endpoint" content={expressEndpoint} />
+          <Action.OpenInBrowser title="Open Express Endpoint" url={expressEndpoint} />
         </ActionPanel>
       }
     />
