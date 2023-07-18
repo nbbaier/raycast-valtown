@@ -2,7 +2,7 @@
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "val-town",
   "title": "Val Town",
-  "description": "",
+  "description": "A simple Raycast extension to fetch information about Vals from val.town",
   "icon": "command-icon.png",
   "author": "nbbaier",
   "license": "MIT",
