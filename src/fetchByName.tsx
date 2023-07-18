@@ -1,5 +1,5 @@
-import { Detail, Toast, getPreferenceValues, showToast, ActionPanel, Action } from "@raycast/api";
-import fetch from "node-fetch";
+import { Action, ActionPanel, Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
 import { ValInfo } from "./types";
 import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
@@ -7,46 +7,38 @@ import createActionPanel from "./ActionPanel";
 
 const { apiToken } = getPreferenceValues();
 
-export default function Val(props: { arguments: Arguments.FetchByName }) {
-  const [markdown, setMarkdown] = useState<string>();
+export default function Command(props: { arguments: Arguments.FetchByName }) {
+  const valInfo: ValInfo = {
+    valname: props.arguments.valname.split(".")[1],
+    username: props.arguments.valname.split(".")[0].startsWith("@")
+      ? props.arguments.valname.split(".")[0].substring(1)
+      : props.arguments.valname.split(".")[0],
+  };
 
-  const valInfo: ValInfo = { valname: props.arguments.valname, username: props.arguments.user };
   const valtownURL = buildValtownURL(valInfo);
   const runEndpoint = buildRunEndpoint(valInfo);
   const expressEndpoint = buildExpressEndpoint(valInfo);
 
-  let status: number;
-  useEffect(() => {
-    fetch(`https://api.val.town/v1/alias/${props.arguments.user}/${props.arguments.valname}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + apiToken,
+  const [markdown, setMarkdown] = useState<string>();
+
+  const { isLoading, data, revalidate } = useFetch(
+    `https://api.val.town/v1/alias/${valInfo.username}/${valInfo.valname}`,
+    {
+      onError: (error) => {
+        console.error(error);
+        setMarkdown("");
+        showToast(Toast.Style.Failure, "Sorry, that Val could not found.");
       },
-    })
-      .then((res) => {
-        status = res.status;
-        console.log("" + status);
-        if (status === 200) {
-          return res.json();
-        }
-        return res.text();
-      })
-      .then((json) => {
-        if (status === 200) {
-          setMarkdown(codeblock(JSON.stringify(json, null, 2), "json"));
-        } else {
-          setMarkdown(String(json));
-        }
-      })
-      .catch((err) => {
-        showToast(Toast.Style.Failure, "Error", err);
-      });
-  }, []);
+    }
+  );
+
+  useEffect(() => {
+    setMarkdown(codeblock(JSON.stringify(data, null, 2), "json"));
+  }, [data]);
 
   return (
     <Detail
-      isLoading={typeof markdown == "undefined"}
+      isLoading={isLoading}
       markdown={markdown}
       actions={createActionPanel(valtownURL, runEndpoint, expressEndpoint)}
     />

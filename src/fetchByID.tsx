@@ -1,39 +1,27 @@
 import { Action, ActionPanel, Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
-import fetch from "node-fetch";
+import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
 import { ValInfo } from "./types";
-import { buildExpressEndpoint, buildRunEndpoint, codeblock, buildValtownURL } from "./utils";
+import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
 import createActionPanel from "./ActionPanel";
 
 const { apiToken } = getPreferenceValues();
 
-export default function Val(props: { arguments: Arguments.FetchByID }) {
+export default function Command(props: { arguments: Arguments.FetchByID }) {
   const [jsonData, setJsonData] = useState<any>();
   const [valInfo, setValInfo] = useState<ValInfo>({ valname: "", username: "" });
 
-  let status: number;
+  const { isLoading, data, revalidate } = useFetch(`https://api.val.town/v1/vals/${props.arguments.valid}`, {
+    onError: (error) => {
+      console.error(error);
+      let markdown = "";
+      showToast(Toast.Style.Failure, "Sorry, that Val could not found.");
+    },
+  });
+
   useEffect(() => {
-    fetch(`https://api.val.town/v1/vals/${props.arguments.valid}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + apiToken,
-      },
-    })
-      .then((res) => {
-        status = res.status;
-        if (status === 200) {
-          return res.json();
-        }
-        return res.text();
-      })
-      .then((json) => {
-        setJsonData(json);
-      })
-      .catch((err) => {
-        showToast(Toast.Style.Failure, "Error", err);
-      });
-  }, []);
+    setJsonData(data);
+  }, [data]);
 
   useEffect(() => {
     if (jsonData && typeof jsonData === "object") {
@@ -42,7 +30,7 @@ export default function Val(props: { arguments: Arguments.FetchByID }) {
     }
   }, [jsonData]);
 
-  const markdown = jsonData ? codeblock(JSON.stringify(jsonData, null, 2), "json") : undefined;
+  let markdown = jsonData ? codeblock(JSON.stringify(jsonData, null, 2), "json") : undefined;
 
   const valtownURL = buildValtownURL(valInfo);
   const runEndpoint = buildRunEndpoint(valInfo);
@@ -50,7 +38,7 @@ export default function Val(props: { arguments: Arguments.FetchByID }) {
 
   return (
     <Detail
-      isLoading={typeof markdown == "undefined"}
+      isLoading={isLoading}
       markdown={markdown}
       actions={createActionPanel(valtownURL, runEndpoint, expressEndpoint)}
     />
