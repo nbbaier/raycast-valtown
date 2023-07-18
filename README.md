@@ -1,4 +1,4 @@
-#val town raycast extension
+# Val Town 
 This is a simple Raycast extension that allows one to fetch information about Vals from val.town using their new API. All that you need to bring is a val.town API key. 
 
 Currently there are two commands:
