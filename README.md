@@ -10,7 +10,7 @@ Currently there are two commands:
 You can also open vals directly on Val Town and copy or open directly the run and express endpoints for vals. 
 
 ## Ideas for future enhancements
-- Better presentation of the API response (not just formatted JSON)
+- Better presentation of the API response (not just pretty printed JSON)
 - The ability to run vals locally
 - Default username to use in Fetch Val by Name
 
