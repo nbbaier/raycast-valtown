@@ -2,7 +2,7 @@ import { Action, ActionPanel, Detail, Toast, getPreferenceValues, showToast } fr
 import fetch from "node-fetch";
 import { useEffect, useState } from "react";
 import { ValInfo } from "./types";
-import { buildExpressEndpoint, buildRunEndpoint, codeblock } from "./utils";
+import { buildExpressEndpoint, buildRunEndpoint, codeblock, buildValtownURL } from "./utils";
 
 const { apiToken } = getPreferenceValues();
 
@@ -43,6 +43,7 @@ export default function Val(props: { arguments: Arguments.FetchByID }) {
 
   const markdown = jsonData ? codeblock(JSON.stringify(jsonData, null, 2), "json") : undefined;
 
+  const valtownURL = buildValtownURL(valInfo);
   const runEndpoint = buildRunEndpoint(valInfo);
   const expressEndpoint = buildExpressEndpoint(valInfo);
 
@@ -52,6 +53,7 @@ export default function Val(props: { arguments: Arguments.FetchByID }) {
       markdown={markdown}
       actions={
         <ActionPanel>
+          <Action.OpenInBrowser title="Open on Val Town" url={valtownURL} />
           <Action.CopyToClipboard title="Copy Run Endpoint" content={runEndpoint} />
           <Action.OpenInBrowser title="Open Run Endpoint" url={runEndpoint} />
           <Action.CopyToClipboard title="Copy Express Endpoint" content={expressEndpoint} />

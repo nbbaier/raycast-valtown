@@ -2,7 +2,7 @@ import { Detail, Toast, getPreferenceValues, showToast, ActionPanel, Action } fr
 import fetch from "node-fetch";
 import { useEffect, useState } from "react";
 import { ValInfo } from "./types";
-import { buildExpressEndpoint, buildRunEndpoint, codeblock } from "./utils";
+import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
 
 const { apiToken } = getPreferenceValues();
 
@@ -10,6 +10,7 @@ export default function Val(props: { arguments: Arguments.FetchByName }) {
   const [markdown, setMarkdown] = useState<string>();
 
   const valInfo: ValInfo = { valname: props.arguments.valname, username: props.arguments.user };
+  const valtownURL = buildValtownURL(valInfo);
   const runEndpoint = buildRunEndpoint(valInfo);
   const expressEndpoint = buildExpressEndpoint(valInfo);
 
@@ -48,6 +49,7 @@ export default function Val(props: { arguments: Arguments.FetchByName }) {
       markdown={markdown}
       actions={
         <ActionPanel>
+          <Action.OpenInBrowser title="Open on Val Town" url={valtownURL} />
           <Action.CopyToClipboard title="Copy Run Endpoint" content={runEndpoint} />
           <Action.OpenInBrowser title="Open Run Endpoint" url={runEndpoint} />
           <Action.CopyToClipboard title="Copy Express Endpoint" content={expressEndpoint} />
