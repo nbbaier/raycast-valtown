@@ -25,6 +25,9 @@ export function buildRunEndpoint(valInfo: ValInfo) {
   return `https://api.val.town/v1/run/${formatUsername(valInfo.username)}.${valInfo.valname}`;
 }
 
-export function codeblock(code: string, language: string) {
+export function codeblock(code: string, language: string, heading?: string) {
+  if (heading) {
+    return "## " + heading + "\n" + "```" + language + "\n" + code + "\n```";
+  }
   return "```" + language + "\n" + code + "\n```";
 }
