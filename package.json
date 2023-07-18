@@ -13,12 +13,6 @@
       "description": "Get a val by it's name",
       "arguments": [
         {
-          "name": "user",
-          "type": "text",
-          "placeholder": "user",
-          "required": true
-        },
-        {
           "name": "valname",
           "type": "text",
           "placeholder": "val name",
@@ -46,6 +40,20 @@
       "title": "Create a Val",
       "description": "Get a val by it's name",
       "mode": "no-view"
+    },
+    {
+      "name": "fetchCode",
+      "title": "Fetch Val Code",
+      "description": "Get a val's code",
+      "mode": "view",
+      "arguments": [
+        {
+          "name": "valname",
+          "type": "text",
+          "placeholder": "val name",
+          "required": true
+        }
+      ]
     }
   ],
   "preferences": [
