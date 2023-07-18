@@ -40,6 +40,12 @@
         }
       ],
       "mode": "view"
+    },
+    {
+      "name": "createVal",
+      "title": "Create a Val",
+      "description": "Get a val by it's name",
+      "mode": "no-view"
     }
   ],
   "preferences": [
@@ -54,7 +60,8 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.55.2",
-    "@raycast/utils": "^1.8.0"
+    "@raycast/utils": "^1.8.0",
+    "zx": "^7.2.3"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
