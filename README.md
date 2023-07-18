@@ -3,8 +3,16 @@ This is a simple Raycast extension that allows one to fetch information about Va
 
 Currently there are two commands:
 
-- Fetch Val by Name (requires both username and val name to be input)
-- Fetch Val by ID (requires a val's unique ID to be input)
+- Fetch Val by Name (requires both username and val name to be input - uses the `/alias/:username/:val_name` endpoint)
+- Fetch Val by ID (requires a val's unique ID to be input - uses the `/vals/:val_is` endpoint)
 
-In addition, you can copy or open directly the run and express endpoints for vals. 
+You can also open vals directly on Val Town and copy or open directly the run and express endpoints for vals. 
 
+## Ideas for future enhancements
+- Better presentation of the API response (not just formatted JSON)
+- The ability to run vals locally
+- A quick way to open val.new
+- Default username to use in Fetch Val by Name
+
+## Inspiration 
+- [Val Town Raycast Extension](https://github.com/pomdtr/val-town-raycast-extension) by [pomdtr](https://github.com/pomdtr)
