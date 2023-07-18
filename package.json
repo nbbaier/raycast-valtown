@@ -64,6 +64,14 @@
       "title": "API Token",
       "placeholder": "API Token",
       "required": true
+    },
+    {
+      "name": "username",
+      "type": "textfield",
+      "description": "Val Town username",
+      "title": "Username",
+      "placeholder": "username",
+      "required": false
     }
   ],
   "dependencies": {

@@ -24,6 +24,9 @@ export default function Command(props: { arguments: Arguments.FetchCode }) {
   const { isLoading, data, revalidate } = useFetch(
     `https://api.val.town/v1/alias/${valInfo.username}/${valInfo.valname}`,
     {
+      headers: {
+        Accept: "Bearer" + apiToken,
+      },
       onError: (error) => {
         console.error(error);
         setMarkdown("");

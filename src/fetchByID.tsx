@@ -7,11 +7,20 @@ import createActionPanel from "./ActionPanel";
 
 const { apiToken } = getPreferenceValues();
 
+const id = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
+
 export default function Command(props: { arguments: Arguments.FetchByID }) {
   const [jsonData, setJsonData] = useState<any>();
   const [valInfo, setValInfo] = useState<ValInfo>({ valname: "", username: "" });
 
+  if (!id.test(props.arguments.valid)) {
+    showToast(Toast.Style.Failure, "Not a valid ID");
+    return;
+  }
   const { isLoading, data, revalidate } = useFetch(`https://api.val.town/v1/vals/${props.arguments.valid}`, {
+    headers: {
+      Accept: "Bearer" + apiToken,
+    },
     onError: (error) => {
       console.error(error);
       let markdown = "";
