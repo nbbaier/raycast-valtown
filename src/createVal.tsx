@@ -1,5 +1,7 @@
-import { $ } from "zx";
+import { open } from "@raycast/api";
+
+const url = "https://val.new";
 
 export default async function Command() {
-  const result = await $`open https://val.new`;
+  await open(url);
 }
