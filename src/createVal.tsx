@@ -1,7 +1,9 @@
-import { open } from "@raycast/api";
+import { open, LaunchProps } from "@raycast/api";
+import qs from "qs";
 
-const url = "https://val.new";
+const url = "https://val.town/new";
 
-export default async function Command() {
-  await open(url);
+export default async function Command(props: LaunchProps<{ arguments: Arguments.CreateVal }>) {
+  const queryString = qs.stringify({ code: props.arguments.queryString });
+  await open(`${url}?${queryString}`);
 }
