@@ -39,7 +39,15 @@
       "name": "createVal",
       "title": "Create a Val",
       "description": "Get a val by it's name",
-      "mode": "no-view"
+      "mode": "no-view",
+      "arguments": [
+        {
+          "name": "queryString",
+          "type": "text",
+          "placeholder": "code",
+          "required": false
+        }
+      ]
     },
     {
       "name": "fetchCode",
@@ -76,11 +84,13 @@
   ],
   "dependencies": {
     "@raycast/api": "^1.55.2",
-    "@raycast/utils": "^1.8.0"
+    "@raycast/utils": "^1.8.0",
+    "qs": "^6.11.2"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
     "@types/node": "18.8.3",
+    "@types/qs": "^6.9.7",
     "@types/react": "18.0.9",
     "eslint": "^7.32.0",
     "prettier": "^2.5.1",
