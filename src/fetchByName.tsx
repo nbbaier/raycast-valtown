@@ -1,27 +1,19 @@
-import { Action, ActionPanel, Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import { Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
+import createActionPanel from "./ActionPanel";
 import { ValInfo } from "./types";
 import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
-import createActionPanel from "./ActionPanel";
 
-const { apiToken, username } = getPreferenceValues();
+const { apiToken } = getPreferenceValues();
 
 export default function Command(props: { arguments: Arguments.FetchByName }) {
-  let valInfo: ValInfo;
-  if (props.arguments.valname.includes(".")) {
-    valInfo = {
-      valname: props.arguments.valname.split(".")[1],
-      username: props.arguments.valname.split(".")[0].startsWith("@")
-        ? props.arguments.valname.split(".")[0].substring(1)
-        : props.arguments.valname.split(".")[0],
-    };
-  } else {
-    valInfo = {
-      valname: props.arguments.valname,
-      username: username,
-    };
-  }
+  const valInfo: ValInfo = {
+    valname: props.arguments.valname.split(".")[1],
+    username: props.arguments.valname.split(".")[0].startsWith("@")
+      ? props.arguments.valname.split(".")[0].substring(1)
+      : props.arguments.valname.split(".")[0],
+  };
 
   const valtownURL = buildValtownURL(valInfo);
   const runEndpoint = buildRunEndpoint(valInfo);

@@ -1,9 +1,9 @@
-import { Action, ActionPanel, Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
+import { Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
+import createActionPanel from "./ActionPanel";
 import { ValInfo } from "./types";
 import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
-import createActionPanel from "./ActionPanel";
 
 const { apiToken } = getPreferenceValues();
 
