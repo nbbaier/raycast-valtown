@@ -8,3 +8,6 @@ raycast-env.d.ts
 
 # misc
 .DS_Store
+
+src/parse.ts 
+src/sandbox.ts
