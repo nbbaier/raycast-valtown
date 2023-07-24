@@ -1,11 +1,11 @@
 import { Detail, LaunchProps } from "@raycast/api";
-import { usernameSchema, idSchema } from "./types";
+import { usernameSchema, idSchema } from "../types";
 import z from "zod";
 
 const parser = z.string();
 
 export default function Command(props: LaunchProps) {
-  const input = props.arguments.input;
+  const { input } = props.arguments;
   console.log(typeof input);
 
   const result = parser.safeParse(input);

@@ -1,4 +1,4 @@
-import { Mapping, usernameSchema, idSchema, shortValnameSchema, longValnameSchema } from "./types";
+import { Mapping, usernameSchema, idSchema, shortValnameSchema, longValnameSchema } from "../types";
 import z, { ZodSchema } from "zod";
 
 const myID = "5d1042a9-7b0b-499d-8a72-3a8ac7a4e185"; // This will need to be replaced by the variable  in prefs

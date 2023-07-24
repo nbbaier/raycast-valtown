@@ -1,7 +1,7 @@
 import { Detail, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import { useFetch } from "@raycast/utils";
 import { useEffect, useState } from "react";
-import createActionPanel from "./ActionPanel";
+import createActionPanel from "./components/ActionPanel";
 import { ValInfo } from "./types";
 import { buildExpressEndpoint, buildRunEndpoint, buildValtownURL, codeblock } from "./utils";
 
