@@ -1,5 +1,5 @@
 import { Detail, LaunchProps } from "@raycast/api";
-import { usernameSchema, idSchema } from "../types";
+import { usernameSchema, idSchema } from "./types";
 import z from "zod";
 
 const parser = z.string();
