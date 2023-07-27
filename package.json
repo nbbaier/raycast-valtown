@@ -119,13 +119,10 @@
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",
-    "@types/chai": "^4.3.5",
-    "@types/jest": "^29.5.3",
     "@types/mocha": "^10.0.1",
     "@types/node": "18.8.3",
     "@types/qs": "^6.9.7",
     "@types/react": "18.0.9",
-    "chai": "^4.3.7",
     "eslint": "^7.32.0",
     "mocha": "^10.2.0",
     "prettier": "^2.5.1",
